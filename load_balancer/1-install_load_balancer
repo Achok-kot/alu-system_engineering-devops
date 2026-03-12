@@ -4,9 +4,7 @@
 apt-get update
 apt-get install -y haproxy
 
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
-
-cat > /etc/haproxy/haproxy.cfg << 'HAPROXY_EOF'
+cat > /etc/haproxy/haproxy.cfg << 'HAPROXY_CONFIG'
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -33,7 +31,8 @@ frontend http_front
 backend http_back
     balance roundrobin
     server 7050-web-01 44.201.182.188:80 check
-HAPROXY_EOF
+    server 7050-web-02 54.174.109.89:80 check
+HAPROXY_CONFIG
 
 sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
 
