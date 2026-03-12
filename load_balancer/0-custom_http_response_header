@@ -4,11 +4,9 @@
 apt-get update
 apt-get install -y nginx
 
-HOSTNAME=$(hostname)
-
 echo "Hello World!" > /var/www/html/index.html
 
-cat > /etc/nginx/sites-available/default << 'NGINX_CONFIG'
+bash -c 'cat > /etc/nginx/sites-available/default' << 'NGINX_CONFIG'
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
