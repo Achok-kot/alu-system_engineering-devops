@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Configures Nginx with a 301 redirect
+# Configures Nginx with a 301 permanent redirect for /redirect_me
 
-apt-get update
+apt-get update -y
 apt-get install -y nginx
 
 echo "Holberton School" > /var/www/html/index.html

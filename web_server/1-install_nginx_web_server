@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
-# Installs and configures Nginx web server
+# Installs and configures Nginx web server to return Holberton School
 
-apt-get update
+apt-get update -y
 apt-get install -y nginx
 
 echo "Holberton School" > /var/www/html/index.html
 
-service nginx start
+cat > /etc/nginx/sites-available/default << 'NGINX_CONFIG'
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+NGINX_CONFIG
+
+service nginx restart
